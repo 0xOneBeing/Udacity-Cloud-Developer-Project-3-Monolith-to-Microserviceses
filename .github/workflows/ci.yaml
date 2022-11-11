@@ -1,54 +1,49 @@
-
-name: Udagram Microservices Project
+name: Udagram Cloud Developer - Monolith to Microservices Project
 
 on:
   push:
-   branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
-      
+    branches: [main]
+
 jobs:
   first_job:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build & Push Reverse Proxy Image to DockerHub
-      run: |
-        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-        docker build -t oxonebeing/reverseproxy:v2 ./udagram-reverseproxy
-        docker push oxonebeing/reverseproxy:v2
+      - uses: actions/checkout@v2
+      - name: Build & Push Reverse Proxy Image to DockerHub
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          docker build -t oxonebeing/reverseproxy:v2 ./udagram-reverseproxy
+          docker push oxonebeing/reverseproxy:v2
   second_job:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build & Push Backend User Service Image to DockerHub
-      run: |
-        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-        docker build -t oxonebeing/udagram-api-user:v2 ./udagram-api-user
-        docker push oxonebeing/udagram-api-user:v2
+      - uses: actions/checkout@v2
+      - name: Build & Push Backend User Service Image to DockerHub
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          docker build -t oxonebeing/udagram-api-user:v2 ./udagram-api-user
+          docker push oxonebeing/udagram-api-user:v2
   third_job:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build & Push Backend Feed Service Image to DockerHub
-      run: |
-        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-        docker build -t oxonebeing/udagram-api-feed:v2 ./udagram-api-feed
-        docker push oxonebeing/udagram-api-feed:v2
+      - uses: actions/checkout@v2
+      - name: Build & Push Backend Feed Service Image to DockerHub
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          docker build -t oxonebeing/udagram-api-feed:v2 ./udagram-api-feed
+          docker push oxonebeing/udagram-api-feed:v2
   forth_job:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build & Push Frontend Image to DockerHub
-      run: |
-        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-        docker build -t oxonebeing/udagram-frontend:v2 ./udagram-frontend
-        docker push oxonebeing/udagram-frontend:v2
+      - uses: actions/checkout@v2
+      - name: Build & Push Frontend Image to DockerHub
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          docker build -t oxonebeing/udagram-frontend:v2 ./udagram-frontend
+          docker push oxonebeing/udagram-frontend:v2
